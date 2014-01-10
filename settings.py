@@ -9,6 +9,8 @@ DATABASE = {
     'password': ''
 }
 
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 try:
     from local_settings import *
 except ImportError:
