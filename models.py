@@ -44,12 +44,12 @@ class FlickrImage(ImageModel):
     flickr_src = Column(String(1024))
 
     def get_cropped(self, width, height, session):
-        r = session.query(CroppedFlickrImage).filter(
+        cropped = session.query(CroppedFlickrImage).filter(
             CroppedFlickrImage.full_img==self, 
             CroppedFlickrImage.height==height, 
-            CroppedFlickrImage.width==width).all()
-        if r:
-            return r[0]
+            CroppedFlickrImage.width==width).first()
+        if cropped:
+            return cropped
 
         else:
             # Crop image

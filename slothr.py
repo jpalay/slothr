@@ -1,4 +1,5 @@
 import mimetypes
+from random import randrange
 
 from flask import Flask, abort, send_file
 
@@ -19,7 +20,8 @@ def get_image(width, height):
             'img': img
         })
     imgs = sorted(imgs, key=lambda d: d['ratio_diff'])
-    img = imgs[0]['img']
+    # Choose a random image to spice things up a bit ;)
+    img = imgs[randrange(4)]['img']
     cropped = img.get_cropped(width, height, s)
     sf = send_file(cropped.path, mimetypes.guess_type(cropped.path)[0])
     s.close()
