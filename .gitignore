@@ -1,0 +1,8 @@
+.DS_Store
+.pyrc
+
+*sw[op]
+*py[oc]
+local_settings.py
+resources/full_res/*
+resources/thumbnails/*
