@@ -1,3 +1,5 @@
+import os
+
 # change this for production servers probably
 SECRET_KEY = 'DEVELOPMENT SECRET KEY'
 
