@@ -8,7 +8,7 @@ s = Session()
 app = Flask(__name__)
 app.config.from_object('settings')
 
-@app.route('/image/<int:width>/<int:height>')
+@app.route('/image/<int:width>/<int:height>/')
 def get_image(width, height):
     ratio = float(width) / height
     s = Session()
