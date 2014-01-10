@@ -72,13 +72,12 @@ class FlickrImage(ImageModel):
             i = i.resize((width, height), Image.ANTIALIAS)
             
             # Make CropppedFlickrImage
-            rsrc_folder = '/'.join(self.path.split('/')[:-2])
             filename = self.path.split('/')[-1]
             name = '.'.join(filename.split('.')[:-1])
             ext = filename.split('.')[-1]
             new_filename = '{0}_{1}X{2}.{3}'.format(name, width, height, ext)
             new_img = CroppedFlickrImage(
-                _path=rsrc_folder + '/thumbnails/' + new_filename,
+                _path='resources/thumbnails/' + new_filename,
                 width=width,
                 height=height,
                 image_id=self.id
