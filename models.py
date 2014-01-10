@@ -30,7 +30,7 @@ class ImageModel(Base):
 
     @property
     def path(self):
-        return APP_ROOT + self._path
+        return APP_ROOT + '/' + self._path
     
     def __repr__(self):
         return '<{0}: {1}>'.format(self.__class__.__name__, self.__unicode__())
