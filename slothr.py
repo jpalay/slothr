@@ -1,3 +1,4 @@
+import datetime
 import mimetypes
 from random import randrange
 
@@ -23,9 +24,13 @@ def get_image(width, height):
     # Choose a random image to spice things up a bit ;)
     img = imgs[randrange(4)]['img']
     cropped = img.get_cropped(width, height, s)
-    sf = send_file(cropped.path, mimetypes.guess_type(cropped.path)[0])
+    response = send_file(cropped.path, mimetypes.guess_type(cropped.path)[0])
     s.close()
-    return sf
+    response.headers.add('Last-Modified', datetime.datetime.now())
+    response.headers.add('Cache-Control', 
+            'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    response.headers.add('Pragma', 'no-cache')
+    return response
 
 @app.route('/<int:img_id>/<int:width>/<int:height>/')
 def get_by_id(img_id, width, height):
@@ -34,9 +39,9 @@ def get_by_id(img_id, width, height):
     if not img:
         abort(404)
     cropped = img.get_cropped(width, height, s)
-    sf = send_file(cropped.path, mimetypes.guess_type(cropped.path)[0])
+    response = send_file(cropped.path, mimetypes.guess_type(cropped.path)[0])
     s.close()
-    return sf
+    return response
 
 
 if __name__ == '__main__':
